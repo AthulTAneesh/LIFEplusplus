@@ -2,21 +2,35 @@
   <head>
     <title>MeLyf</title>
     <style>
-      body{
+      body{ 
         background-color: pink;
         text-align: center;
       }
 
-      .Journal-button{
+      .Menu-button{
         background-color: rgb(87, 48, 183);
         width: 100px;
         height: 50px;
         color: rgb(237, 178, 231);
+        font-weight: bold;
+        font-size: 15px;
         border-style: solid;
-        border-radius: 5px;
+        border-radius: 25px;
         border-width: 3px;
         border-color: rgb(118, 38, 125);
         cursor: pointer;
+        transition: opacity 0.3s;
+        transition: box-shadow 0.3;
+      }
+
+      .Menu-button:hover{
+        background-color: rgb(237, 178, 231);;
+        color: rgb(87, 48, 183);
+        box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+      }
+
+      .Menu-button:active{
+        opacity: 0.7;
       }
     </style>
   </head>
@@ -24,11 +38,11 @@
   <body bgcolor="pink">
     <H1 align = 'center'>Me Lyf</H1>
     <hr>
-    <a href="journal.html"><button class="Journal-button">Journal</button></a>
+    <a href="journal.html"><button class="Menu-button">Journal</button></a>
     <hr>
-    <a href="money.html"><button class="Journal-button">Money tracker</button></a>
+    <a href="money.html"><button class="Menu-button">Money tracker</button></a>
     <hr>
-    <a href="studylog.html"><button class="Journal-button">Study log</button></a>
+    <a href="studylog.html"><button class="Menu-button">Study log</button></a>
     <hr>
   </body>
 </html>
