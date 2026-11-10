@@ -1,52 +1,71 @@
-const btnEl = document.getElementById('btn');
-const appEl = document.getElementById('app');
+const btnEl = document.getElementById("btn");
+const appEl = document.getElementById("app");
 const notes = getNotes();
 
 function saveNotes() {
   if (notes.length === 0) {
-    localStorage.removeItem('notes');
+    localStorage.removeItem("notes");
     return;
   }
-  localStorage.setItem('notes',JSON.stringify(notes));
+
+  localStorage.setItem("notes", JSON.stringify(notes));
 }
 
 function getNotes() {
-  const notes = localStorage.getItem('notes');
-  if (!notes) return [];
-  try{
-    const parsedNotes = JSON.parse(notes);
-    return Array.isArray(parsedNotes) ? parseNotes : [];
+  const savedNotes = localStorage.getItem("notes");
+
+  if (!savedNotes) {
+    return [];
+  }
+
+  try {
+    const parsedNotes = JSON.parse(savedNotes);
+    return Array.isArray(parsedNotes) ? parsedNotes : [];
   } catch (error) {
-    localStorage.removeItem('notes');
+    localStorage.removeItem("notes");
     return [];
   }
 }
 
 function updateNote(id, newText) {
   const target = notes.find((note) => note.id === id);
+
+  if (!target) {
+    return;
+  }
+
   target.text = newText;
   saveNotes();
 }
 
 function deleteNote(id, element) {
   const index = notes.findIndex((note) => note.id === id);
-  notes.splice(index,1)
+
+  if (index === -1) {
+    return;
+  }
+
+  notes.splice(index, 1);
   element.remove();
   saveNotes();
 }
 
 function createNoteElement(id, text) {
   const element = document.createElement("textarea");
+
   element.classList.add("note");
   element.value = text;
-  element.placeholder = 'Write your note...';
+  element.placeholder = "Write your note...";
   element.dataset.id = id;
-  element.addEventListener('input', () => {
-    updateNote(id, element.value)
+
+  element.addEventListener("input", () => {
+    updateNote(id, element.value);
   });
-  element.addEventListener('dbclick', () => {
+
+  element.addEventListener("dblclick", () => {
     deleteNote(id, element);
   });
+
   return element;
 }
 
@@ -58,13 +77,18 @@ function renderNotes() {
 }
 
 function addNote() {
-  const noteObject = {id: Date.now(), text: ''};
+  const noteObject = {
+    id: Date.now(),
+    text: "",
+  };
+
   notes.push(noteObject);
 
   const noteElement = createNoteElement(noteObject.id, noteObject.text);
   appEl.insertBefore(noteElement, btnEl);
+  saveNotes();
 }
 
-btnEl.addEventListener('click', addNote)
+btnEl.addEventListener("click", addNote);
 
 renderNotes();
