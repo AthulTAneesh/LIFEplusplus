@@ -9,3 +9,9 @@ To write journals lol
 - Set daily reminders for entry
 - Easily accesing by sorting it with year,month,week,etc.
 
+## How it works
+
+- When you reach, the journal window, you see a button called new entry
+- Click the button to create new note
+- To delete a note, doubleclick on the note
+
